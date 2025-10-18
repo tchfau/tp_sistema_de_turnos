@@ -12,23 +12,3 @@ class Transformador(object):
             j = j + 1
         return d
 
-archivo = open("clientes.csv", "rt")
-llaves = archivo.readline()
-o = Transformador(llaves)
-
-lista = []
-
-line = archivo.readline()
-while line != "":
-    if line == "\n":  # saltar si la líena está vacía
-        line = archivo.readline()
-        continue
-
-    d = o.str2dict(line)
-    lista.append(d)
-
-    line = archivo.readline() 
-
-archivo.close()
-
-print(lista)
