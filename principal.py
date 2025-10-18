@@ -4,8 +4,11 @@ from transformador import Transformador
 #------------ Programa principal --------------- 
 
 archivo_clientes = open("clientes.csv", "rt")
+archivo_empleados = open("empelados.csv", "rt")
 llaves_clientes = archivo_clientes.readline()
-cli = Transformador(llaves_clientes)
+llaves_empleados = archivo_empleados.readline()
+cliente = Transformador(llaves_clientes)
+empleado = Transformador(llaves_empleados)
 
 lista = []
 
@@ -15,16 +18,17 @@ while line != "":
         line = archivo_clientes.readline()
         continue
 
-    d = cli.str2dict(line)
+    d = cliente.str2dict(line)
     lista.append(d)
     line = archivo_clientes.readline() 
 
 archivo_clientes.close()
+archivo_empleados.close()
 
 
 
 def registrar_cliente():
-    nuevo = cli.ingresar_valores()
+    nuevo = cliente.ingresar_valores()
     lista.append(nuevo)
     print("Cliente registrado correctamente")
 
