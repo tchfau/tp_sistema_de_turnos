@@ -28,7 +28,7 @@ while line_cli != "":
 line_emp = archivo_empleados.readline()
 while line_emp != "":
     if line_emp == "\n":  # saltar si la líena está vacía
-        line_emp = archivo_clientes.readline()
+        line_emp = archivo_empleados.readline()
         continue
 
     d = empleado.str2dict(line_emp)
