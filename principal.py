@@ -4,7 +4,7 @@ from transformador import Transformador
 #------------ Programa principal --------------- 
 
 archivo_clientes = open("clientes.csv", "rt")
-archivo_empleados = open("empelados.csv", "rt")
+archivo_empleados = open("empleados.csv", "rt")
 llaves_clientes = archivo_clientes.readline()
 llaves_empleados = archivo_empleados.readline()
 cliente = Transformador(llaves_clientes)
@@ -33,7 +33,9 @@ def registrar_cliente():
     print("Cliente registrado correctamente")
 
 def registrar_nuevo_empleado():
-    print("Registra nuevo empleado")
+    nuevo = empleado.ingresar_valores()
+    lista.append(nuevo)
+    print("Empleado registrado correctamente")
 
 def solicitar_turno():
     print("Solicitando un nuevo turno")
