@@ -1,5 +1,28 @@
 #------------ Programa principal --------------- 
 
+def registrar_cliente():
+    print("Registra nuevo cliente")
+
+def registrar_nuevo_empleado():
+    print("Registra nuevo empleado")
+
+def solicitar_turno():
+    print("Solicitando un nuevo turno")
+
+def listar_trunos():
+    print("Se listan los turnos")
+
+def modificar_turno():
+    print("Se modifica turno existente")
+
+def cancelar_turno():
+    print("Se cancela turno")
+
+def guardar_datos():
+    print("se guardan datos en archivo CSV")
+
+
+
 print("**************************************")
 print("**************************************")
 print('SISTEMA DE GESTIÓN DE TURNOS')
