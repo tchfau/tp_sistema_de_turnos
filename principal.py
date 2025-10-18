@@ -5,7 +5,7 @@ print("**************************************")
 print('SISTEMA DE GESTIÓN DE TURNOS')
 print("**************************************")
 print("--------------------------------------")
-print("Seleccione la opción deseada:")
+print("MENU PRINCIPAL")
 print("--------------------------------------")
 
 menu = """
@@ -20,3 +20,28 @@ menu = """
 
 """
 print(menu)
+
+def mostrar_menu():
+    while True:
+        opcion = input("Seleccione la opción deseada (1 - 8): ")
+        if opcion == "1":
+            registrar_cliente()
+        elif opcion == "2":
+            registrar_nuevo_empleado()
+        elif opcion == "3":
+            solicitar_turno()
+        elif opcion == "4":
+            listar_trunos()
+        elif opcion == "5":
+            modificar_turno()
+        elif opcion == "6":
+            cancelar_turno()
+        elif opcion == "7":
+            guardar_datos()
+        elif opcion == "8":
+            print("Saliendo del programa")
+            break
+        else:
+            print("Opción inválida. Intente nuevamente")
+
+mostrar_menu()
