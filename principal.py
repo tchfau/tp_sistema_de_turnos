@@ -38,7 +38,7 @@ while line_emp != "":
 archivo_clientes.close()
 archivo_empleados.close()
 
-class GestorTurno(object):
+class GestorTurnos(object):
 
     def registrar_cliente():
         nuevo = cliente.ingresar_valores()
@@ -92,25 +92,25 @@ class GestorTurno(object):
         while True:
             opcion = input("Seleccione la opción deseada (1 - 8): ")
             if opcion == "1":
-                GestorTurno.registrar_cliente()
+                GestorTurnos.registrar_cliente()
             elif opcion == "2":
-                GestorTurno.registrar_nuevo_empleado()
+                GestorTurnos.registrar_nuevo_empleado()
             elif opcion == "3":
-                GestorTurno.solicitar_turno()
+                GestorTurnos.solicitar_turno()
             elif opcion == "4":
-                GestorTurno.listar_trunos()
+                GestorTurnos.listar_trunos()
             elif opcion == "5":
-                GestorTurno.modificar_turno()
+                GestorTurnos.modificar_turno()
             elif opcion == "6":
-                GestorTurno.cancelar_turno()
+                GestorTurnos.cancelar_turno()
             elif opcion == "7":
-                GestorTurno.guardar_datos()
+                GestorTurnos.guardar_datos()
             elif opcion == "8":
                 print("Saliendo del programa")
                 break
             else:
                 print("Opción inválida. Intente nuevamente")
 
-GestorTurno.mostrar_menu()
+GestorTurnos.mostrar_menu()
 print("Lista de empleados:\n", lista_empleados)
 print("Lista de clientes:\n", lista_clientes)
