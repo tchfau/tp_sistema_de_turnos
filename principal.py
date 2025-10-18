@@ -1,3 +1,5 @@
+from persona import Persona, Cliente, Empleado
+
 #------------ Programa principal --------------- 
 
 def registrar_cliente():
