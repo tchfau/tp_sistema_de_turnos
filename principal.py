@@ -10,17 +10,29 @@ llaves_empleados = archivo_empleados.readline()
 cliente = Transformador(llaves_clientes)
 empleado = Transformador(llaves_empleados)
 
-lista = []
+lista_clientes = []
+lista_empleados = []
 
-line = archivo_clientes.readline()
-while line != "":
-    if line == "\n":  # saltar si la líena está vacía
-        line = archivo_clientes.readline()
+line_cli = archivo_clientes.readline()
+while line_cli != "":
+    if line_cli == "\n":  # saltar si la líena está vacía
+        line_cli = archivo_clientes.readline()
         continue
 
-    d = cliente.str2dict(line)
-    lista.append(d)
-    line = archivo_clientes.readline() 
+    d = cliente.str2dict(line_cli)
+    lista_clientes.append(d)
+    line_cli = archivo_clientes.readline() 
+
+
+line_emp = archivo_empleados.readline()
+while line_emp != "":
+    if line_emp == "\n":  # saltar si la líena está vacía
+        line_emp = archivo_clientes.readline()
+        continue
+
+    d = empleado.str2dict(line_emp)
+    lista_empleados.append(d)
+    line_emp = archivo_empleados.readline() 
 
 archivo_clientes.close()
 archivo_empleados.close()
@@ -29,13 +41,13 @@ archivo_empleados.close()
 
 def registrar_cliente():
     nuevo = cliente.ingresar_valores()
-    lista.append(nuevo)
+    lista_clientes.append(nuevo)
     print("Cliente registrado correctamente")
 
 def registrar_nuevo_empleado():
     nuevo = empleado.ingresar_valores()
-    lista.append(nuevo)
-    print("Empleado registrado correctamente")
+    lista_empleados.append(nuevo)
+    print("Empleado registrado correctaemente")
 
 def solicitar_turno():
     print("Solicitando un nuevo turno")
@@ -99,4 +111,5 @@ def mostrar_menu():
             print("Opción inválida. Intente nuevamente")
 
 mostrar_menu()
-print(lista)
+print("Lista de empleados:\n", lista_empleados)
+print("Lista de clientes:\n", lista_clientes)
