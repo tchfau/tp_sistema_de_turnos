@@ -3,8 +3,30 @@ from transformador import Transformador
 
 #------------ Programa principal --------------- 
 
+archivo_clientes = open("clientes.csv", "rt")
+llaves_clientes = archivo_clientes.readline()
+cli = Transformador(llaves_clientes)
+
+lista = []
+
+line = archivo_clientes.readline()
+while line != "":
+    if line == "\n":  # saltar si la líena está vacía
+        line = archivo_clientes.readline()
+        continue
+
+    d = cli.str2dict(line)
+    lista.append(d)
+    line = archivo_clientes.readline() 
+
+archivo_clientes.close()
+
+
+
 def registrar_cliente():
-    print("Registra nuevo cliente")
+    nuevo = cli.ingresar_valores()
+    lista.append(nuevo)
+    print("Cliente registrado correctamente")
 
 def registrar_nuevo_empleado():
     print("Registra nuevo empleado")
@@ -71,24 +93,4 @@ def mostrar_menu():
             print("Opción inválida. Intente nuevamente")
 
 mostrar_menu()
-
-archivo_clientes = open("clientes.csv", "rt")
-llaves_clientes = archivo_clientes.readline()
-cli = Transformador(llaves_clientes)
-
-lista = []
-
-line = archivo_clientes.readline()
-while line != "":
-    if line == "\n":  # saltar si la líena está vacía
-        line = archivo_clientes.readline()
-        continue
-
-    d = cli.str2dict(line)
-    lista.append(d)
-
-    line = archivo_clientes.readline() 
-
-archivo_clientes.close()
-
 print(lista)
