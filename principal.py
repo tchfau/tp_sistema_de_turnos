@@ -38,6 +38,25 @@ class GestorTurnos(object):
             line_emp = archivo_empleados.readline()
         archivo_empleados.close()
 
+        #Carga y lectura del archivo dueño
+
+        archivo_duenio = open("horarios_nov_manuel.csv", "rt")
+        llaves_hs_duenio = archivo_duenio.readline()
+        self.horarios_duenio = Transformador(llaves_hs_duenio)
+        self.lista_hs_duenio = []
+
+        line_hs_duenio = archivo_duenio.readline()
+        while line_hs_duenio != "":
+            if line_hs_duenio == "\n":  # saltar si la línea está vacía
+                line_hs_duenio = archivo_duenio.readline()
+                continue
+            d = self.horarios_duenio.str2dict(line_hs_duenio)
+            self.lista_hs_duenio.append(d)
+            line_hs_duenio = archivo_duenio.readline()
+        archivo_duenio.close()
+
+
+
     # Métodos del gestor 
     def registrar_cliente(self):
         nuevo = self.cliente.ingresar_valores()
