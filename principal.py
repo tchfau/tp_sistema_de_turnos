@@ -40,7 +40,7 @@ class GestorTurnos(object):
 
         #Carga y lectura del archivo dueño
 
-        archivo_duenio = open("horarios_nov_manuel.csv", "rt")
+        archivo_duenio = open("horarios_nov_duenio.csv", "rt")
         llaves_hs_duenio = archivo_duenio.readline()
         self.horarios_duenio = Transformador(llaves_hs_duenio)
         self.lista_hs_duenio = []
