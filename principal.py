@@ -1,70 +1,44 @@
 from persona import Persona, Cliente, Empleado
 from transformador import Transformador
+from cargar_archivo import carga_archivos
 
 #------------ Programa principal --------------- 
 
 class GestorTurnos(object):
 
     def __init__(self):
-        # Carga y lectura de l archivo clientes
-        archivo_clientes = open("clientes.csv", "rt")
-        llaves_clientes = archivo_clientes.readline()
-        self.cliente = Transformador(llaves_clientes)
+        # CLIENTES 
+        transformador, lista_valores = carga_archivos("clientes.csv")
+        self.transf_cliente = transformador
+        self.cliente = lista_valores     
+
+        # EMPLEADOS 
+        transformador, lista_valores = carga_archivos("empleados.csv")
+        self.transf_empleado = transformador
+        self.empleado = lista_valores    
+
+        # HORARIOS DUEÑO 
+        transformador, lista_valores = carga_archivos("horarios_nov_duenio.csv")
+        self.transf_duenio = transformador
+        self.horarios_duenio = lista_valores  
+
+        # HORARIOS EMPLEADO
+        transformador, lista_valores = carga_archivos("horarios_nov_empleado.csv")
+        self.transf_empleado_horario = transformador
+        self.horarios_empleado = lista_valores
+
+        # LISTAS 
         self.lista_clientes = []
-
-        line_cli = archivo_clientes.readline()
-        while line_cli != "":
-            if line_cli == "\n":  # saltar si la línea está vacía
-                line_cli = archivo_clientes.readline()
-                continue
-            d = self.cliente.str2dict(line_cli)
-            self.lista_clientes.append(d)
-            line_cli = archivo_clientes.readline()
-        archivo_clientes.close()
-
-        # Carga y lectura del archivo empleados
-        archivo_empleados = open("empleados.csv", "rt")
-        llaves_empleados = archivo_empleados.readline()
-        self.empleado = Transformador(llaves_empleados)
         self.lista_empleados = []
-
-        line_emp = archivo_empleados.readline()
-        while line_emp != "":
-            if line_emp == "\n":  # saltar si la línea está vacía
-                line_emp = archivo_empleados.readline()
-                continue
-            d = self.empleado.str2dict(line_emp)
-            self.lista_empleados.append(d)
-            line_emp = archivo_empleados.readline()
-        archivo_empleados.close()
-
-        #Carga y lectura del archivo dueño
-
-        archivo_duenio = open("horarios_nov_duenio.csv", "rt")
-        llaves_hs_duenio = archivo_duenio.readline()
-        self.horarios_duenio = Transformador(llaves_hs_duenio)
-        self.lista_hs_duenio = []
-
-        line_hs_duenio = archivo_duenio.readline()
-        while line_hs_duenio != "":
-            if line_hs_duenio == "\n":  # saltar si la línea está vacía
-                line_hs_duenio = archivo_duenio.readline()
-                continue
-            d = self.horarios_duenio.str2dict(line_hs_duenio)
-            self.lista_hs_duenio.append(d)
-            line_hs_duenio = archivo_duenio.readline()
-        archivo_duenio.close()
-
-
-
+        
     # Métodos del gestor 
     def registrar_cliente(self):
-        nuevo = self.cliente.ingresar_valores()
+        nuevo = self.transf_cliente.ingresar_valores()
         self.lista_clientes.append(nuevo)
         print("Cliente registrado correctamente")
 
     def registrar_nuevo_empleado(self):
-        nuevo = self.empleado.ingresar_valores()
+        nuevo = self.transf_empleado.ingresar_valores()
         self.lista_empleados.append(nuevo)
         print("Empleado registrado correctamente")
 
