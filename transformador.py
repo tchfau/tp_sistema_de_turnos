@@ -5,7 +5,7 @@ class Transformador(object):
         self.keys = []
 
         i = 0
-        while j < len(claves):
+        while i < len(claves):
             clave_limpia = claves[i].strip().replace(";", "")
             self.keys.append(clave_limpia)
             i = i + 1
