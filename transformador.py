@@ -1,7 +1,16 @@
 class Transformador(object):
     def __init__(self, keys):
-        self.keys = keys.replace("\n", "").split(",")  # se elimina el salto de línea
         
+        claves = keys.replace("\n", "").split(",")
+        self.keys = []
+
+        i = 0
+        while j < len(claves):
+            clave_limpia = claves[i].strip().replace(";", "")
+            self.keys.append(clave_limpia)
+            i = i + 1
+
+      
 
     def str2dict(self, valores):
         fila = valores.replace("\n", "").split(",") 
