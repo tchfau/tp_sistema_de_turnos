@@ -17,26 +17,32 @@ class DB(object):
 
         transformador = Transformador(llaves_archivo)
 
-        llaves_archivo = file.readline().strip().replace(";", "")
-        line = file.readline() # Leo encabezado
+        line = file.readline()
+
+        #llaves_archivo = file.readline().strip().replace(";", "")
+        #line = file.readline() # Leo encabezado
+
         while line != "":
-            if line == "\n":  # saltar líneas vacías
-                line = file.readline() # Leo la primera línea
+            line = line.strip()
+            if line == "":  # ignora líneas vacías
+                line = file.readline()
                 continue
-            line = line.replace(';', '')
+
+            line = line.replace(";", "")
             d = transformador.str2dict(line)
 
+            # Si hay clase asociada, crea el objeto; si no, guarda el diccionario
             if self.tipo_registro:
                 objeto = self.tipo_registro(**d)
                 lista_valores.append(objeto)
             else:
                 lista_valores.append(d)
 
+            # Leo la siguiente línea
             line = file.readline()
 
         file.close()
         return transformador, lista_valores
-    
 
     def write(self, registros):
         pass
