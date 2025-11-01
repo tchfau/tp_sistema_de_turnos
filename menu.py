@@ -16,10 +16,12 @@ def mostrar_menu(gestor: GestorTurnos):
 [5] Modificar turno
 [6] Cancelar turno
 [7] Guardar datos 
-[8] Salir
+[8] Listar Clientes
+[9] Listar Empleados
+[0] Salir
 """)
         
-        opcion = input("Seleccione la opción deseada (1 - 8): ").strip()
+        opcion = input("Seleccione la opción deseada (0 - 9): ").strip()
 
         if opcion == "1":
             gestor.registrar_cliente()
@@ -36,9 +38,23 @@ def mostrar_menu(gestor: GestorTurnos):
         elif opcion == "7":
             gestor.guardar_datos()
         elif opcion == "8":
+            print("LISTA DE CLIENTES: ")
+            if len(gestor.lista_clientes) == 0:
+                print("No hay clientes cargados.")
+            else:
+                for cliente in gestor.lista_clientes:
+                    print(cliente)
+                    print("-" * 30)
+        elif opcion == "9":
+            print("LISTA DE EMPLEADOS: ")
+            if len(gestor.lista_empleados) == 0:
+                print("No hay empleados cargados.")
+            else:
+                for empleado in gestor.lista_empleados:
+                    print(empleado) 
+                    print("-" * 30)
+        elif opcion == "0":
             print("Saliendo del programa.")
-            print("Lista de clientes:\n", gestor.lista_clientes)
-            print("Lista de empleados:\n", gestor.lista_empleados)
             break
         else:
             print("Opción inválida. Intente nuevamente.")
