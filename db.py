@@ -16,11 +16,13 @@ class DB(object):
 
         transformador = Transformador(llaves_archivo)
 
+        llaves_archivo = file.readline().strip().replace(";", "")
         line = file.readline() # Leo encabezado
         while line != "":
             if line == "\n":  # saltar líneas vacías
                 line = file.readline() # Leo la primera línea
                 continue
+            line = line.replace(';', '')
             d = transformador.str2dict(line)
             lista_valores.append(d)
             line = file.readline()
