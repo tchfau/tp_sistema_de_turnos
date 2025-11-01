@@ -84,7 +84,16 @@ class GestorTurnos(object):
         print("Solicitando un nuevo turno")
 
     def listar_turnos(self):
-        print("Se listan los turnos")
+        if len(self.lista_turnos) == 0:
+            print("No hay turnos cargados.")
+        else:
+            print("LISTA DE Turnos: ")
+            i = 0
+            while i < len(self.lista_turnos):
+                turno = self.lista_turnos[i]
+                print(f"\nTurno N° {i + 1}")
+                print(turno.mostrar())
+                i = i + 1
 
     def modificar_turno(self):
         print("Se modifica turno existente")
