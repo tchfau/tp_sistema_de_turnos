@@ -2,8 +2,9 @@ from transformador import Transformador
 
 class DB(object):
 
-    def __init__(self, filename):
+    def __init__(self, filename, tipo_registro=None):
         self.filename = filename
+        self.tipo_registro = tipo_registro
     
     def read(self):
         lista_valores = []
@@ -24,7 +25,13 @@ class DB(object):
                 continue
             line = line.replace(';', '')
             d = transformador.str2dict(line)
-            lista_valores.append(d)
+
+            if self.tipo_registro:
+                objeto = self.tipo_registro(**d)
+                lista_valores.append(objeto)
+            else:
+                lista_valores.append(d)
+
             line = file.readline()
 
         file.close()
