@@ -1,2 +1,2 @@
-Nombre,Apellido,CUIL
-Manuel,Rodríguez,203142569720
+id_empleado,nombre,apellido,cuil
+1,Manuel,Rodríguez,203142569720
