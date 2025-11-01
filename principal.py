@@ -6,5 +6,5 @@ from menu import mostrar_menu
 
 # Crea instancia del gestor
 gestor = GestorTurnos()
-#Ejecuta el menu
+# Ejecuta el menu
 mostrar_menu(gestor)

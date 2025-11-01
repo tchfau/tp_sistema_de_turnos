@@ -15,19 +15,16 @@ class GestorTurnos(object):
         self.transf_empleado = transformador
         self.empleado = lista_valores    
 
-        # HORARIOS DUEÑO 
-        transformador, lista_valores = carga_archivos("horarios_nov_duenio.csv")
-        self.transf_duenio = transformador
-        self.horarios_duenio = lista_valores  
+        # TURNOS
+        transformador, lista_valores = carga_archivos("turnos.csv")
+        self.transf_turnos = transformador
+        self.turnos = lista_valores  
 
-        # HORARIOS EMPLEADO
-        transformador, lista_valores = carga_archivos("horarios_nov_empleado.csv")
-        self.transf_empleado_horario = transformador
-        self.horarios_empleado = lista_valores
 
         # LISTAS 
         self.lista_clientes = []
         self.lista_empleados = []
+        self.lista_turnos = []
         
     # Métodos del gestor 
     def registrar_cliente(self):
