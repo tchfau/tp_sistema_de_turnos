@@ -34,9 +34,12 @@ class DB(object):
 
 db_clientes = DB("clientes.csv")
 registros = db_clientes.read()
+
+"""
+
 i = 0
 while i < len(registros):
     print("Nombre: ", registros[i]["nombre"])
     i = i + 1
 
-
+"""
