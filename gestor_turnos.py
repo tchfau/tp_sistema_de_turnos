@@ -1,6 +1,5 @@
 from persona import Persona, Cliente, Empleado
 from transformador import Transformador
-from cargar_archivo import carga_archivos
 from db import DB
 
 class GestorTurnos(object):
