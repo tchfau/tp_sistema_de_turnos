@@ -1,60 +1,82 @@
-from transformador import Transformador
+from persona import Cliente, Empleado
+from turno import Turno
 
 class DB(object):
-
     def __init__(self, filename, tipo_registro=None):
         self.filename = filename
         self.tipo_registro = tipo_registro
-    
+
     def read(self):
-        lista_valores = []
-        file = open(self.filename, "rt")
+        try:
+            archivo = open(self.filename, "r", encoding="utf-8-sig")
+            lineas = archivo.readlines()
+            archivo.close()
+        except FileNotFoundError:
+            return None, []
+        except Exception:
+            return None, []
 
-        llaves_archivo = file.readline()
-        if llaves_archivo == "":
-            file.close()
-            return None, []  # devuelve archivo vacío, sin transformador
+        if not lineas:
+            return None, []
 
-        transformador = Transformador(llaves_archivo)
+        # Encabezado
+        encabezado = lineas[0].strip().replace("\ufeff", "").split(",")
 
-        line = file.readline()
+        lista = []
 
-        #llaves_archivo = file.readline().strip().replace(";", "")
-        #line = file.readline() # Leo encabezado
+        i = 1
+        while i < len(lineas):
+            linea = lineas[i].strip()
+            i += 1
 
-        while line != "":
-            line = line.strip()
-            if line == "":  # ignora líneas vacías
-                line = file.readline()
+            if not linea:
                 continue
 
-            line = line.replace(";", "")
-            d = transformador.str2dict(line)
+            partes = linea.split(",")
 
-            # Si hay clase asociada, crea el objeto; si no, guarda el diccionario
+            # NORMALIZACIÓN TURNOS
+            if self.tipo_registro and self.tipo_registro.__name__.lower() == "turno":
+                if len(partes) >= 5:
+                    id_empleado = partes[0].strip()
+                    nombre_cliente = partes[1].strip()
+                    apellido_cliente = partes[2].strip()
+                    dia = partes[3].strip()
+                    hora = partes[4].strip()
+
+                    cliente = Cliente(nombre=nombre_cliente, apellido=apellido_cliente)
+                    empleado = Empleado(id_empleado=id_empleado)
+
+                    turno = Turno(
+                        cliente=cliente,
+                        empleado=empleado,
+                        id_empleado=id_empleado,
+                        id_cliente="",
+                        dia=dia,
+                        hora=hora
+                    )
+                    lista.append(turno)
+                continue
+
+            # Para clientes/empleados
+            datos = {}
+            j = 0
+            limite = len(encabezado)
+            if len(partes) < limite:
+                limite = len(partes)
+
+            while j < limite:
+                clave = encabezado[j]
+                valor = partes[j].strip()
+                datos[clave] = valor
+                j += 1
+
             if self.tipo_registro:
-                objeto = self.tipo_registro(**d)
-                lista_valores.append(objeto)
+                try:
+                    obj = self.tipo_registro(**datos)
+                    lista.append(obj)
+                except Exception:
+                    lista.append(datos)
             else:
-                lista_valores.append(d)
+                lista.append(datos)
 
-            # Leo la siguiente línea
-            line = file.readline()
-
-        file.close()
-        return transformador, lista_valores
-
-    def write(self, registros):
-        pass
-
-db_clientes = DB("clientes.csv")
-registros = db_clientes.read()
-
-"""
-
-i = 0
-while i < len(registros):
-    print("Nombre: ", registros[i]["nombre"])
-    i = i + 1
-
-"""
+        return encabezado, lista

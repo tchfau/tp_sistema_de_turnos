@@ -1,4 +1,5 @@
 from gestor_turnos import GestorTurnos
+from gestor_archivos import GestorArchivos
 
 def mostrar_menu(gestor: GestorTurnos):
     while True:
@@ -26,7 +27,7 @@ def mostrar_menu(gestor: GestorTurnos):
         if opcion == "1":
             gestor.registrar_cliente()
         elif opcion == "2":
-            gestor.registrar_nuevo_empleado()
+             gestor.registrar_nuevo_empleado()
         elif opcion == "3":
             gestor.solicitar_turno()
         elif opcion == "4":
@@ -36,22 +37,27 @@ def mostrar_menu(gestor: GestorTurnos):
         elif opcion == "6":
             gestor.cancelar_turno()
         elif opcion == "7":
-            gestor.guardar_datos()
+            gestor_archivos = GestorArchivos(
+            gestor.gestor_clientes,
+            gestor.gestor_empleados,
+            gestor
+            )
+            gestor_archivos.guardar_datos()
         elif opcion == "8":
             print("LISTA DE CLIENTES: ")
-            if len(gestor.lista_clientes) == 0:
+            if len(gestor.gestor_clientes.lista_clientes) == 0:
                 print("No hay clientes cargados.")
             else:
-                for cliente in gestor.lista_clientes:
+                for cliente in gestor.gestor_clientes.lista_clientes:
                     print(cliente)
                     print("-" * 30)
         elif opcion == "9":
             print("LISTA DE EMPLEADOS: ")
-            if len(gestor.lista_empleados) == 0:
+            if len(gestor.gestor_empleados.lista_empleados) == 0:
                 print("No hay empleados cargados.")
             else:
-                for empleado in gestor.lista_empleados:
-                    print(empleado) 
+                for empleado in gestor.gestor_empleados.lista_empleados:
+                    print(empleado)
                     print("-" * 30)
         elif opcion == "0":
             print("Saliendo del programa.")
